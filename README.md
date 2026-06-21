@@ -3,13 +3,7 @@
 A clean-room, pure-Python + NumPy inference engine for ternary-weight
 (BitNet b1.58 family) LLMs.
 
-Named for **James Gregory** (1638–1675), the Scottish mathematician and
-astronomer who built the first practical reflecting telescope and discovered
-the *Gregory series* — the infinite series that writes a function as a
-convergent sum of simple terms (arctan / π). Gregory the engine works in the
-same spirit: it turns a prompt into a *convergent sequence of tokens*, one
-simple term at a time, and owns every line of the path from GGUF bytes to
-logits.
+James Gregory is an African American inventor who patented a mechanical motor on April 26, 1887. His device (Patent No. 361,937) 
 
 > **Readable first, with an optional fast path.** The forward pass is a clean
 > fp32 reference (the correctness oracle). An opt-in C kernel accelerates decode
