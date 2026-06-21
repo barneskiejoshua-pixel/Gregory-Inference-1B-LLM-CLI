@@ -3,7 +3,7 @@
 A clean-room, pure-Python + NumPy inference engine for ternary-weight
 (BitNet b1.58 family) LLMs.
 
-James Gregory is an African American inventor who patented a mechanical motor on April 26, 1887. His device (Patent No. 361,937) 
+James Gregory is an American inventor who patented a mechanical motor on April 26, 1887. His device (Patent No. 361,937) 
 
 > **Readable first, with an optional fast path.** The forward pass is a clean
 > fp32 reference (the correctness oracle). An opt-in C kernel accelerates decode
