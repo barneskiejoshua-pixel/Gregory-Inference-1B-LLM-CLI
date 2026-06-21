@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# GREGORY -- talk to the Gregory inference model (interactive chat).
+#
+# Usage:
+#   ./GREGORY                       # start chatting
+#   ./GREGORY --temperature 0.3     # pass chat options through
+#   ./GREGORY --model /path.gguf    # use a different GGUF
+#
+# This is a thin wrapper for `gregory chat`. Any args are forwarded.
+# Resolve symlinks so it works when invoked via ~/.local/bin/GREGORY.
+src="$(readlink -f "${BASH_SOURCE[0]}")"
+here="$(cd "$(dirname "$src")" && pwd)"
+
+# Let --model (a top-level CLI flag) be passed before the `chat` subcommand.
+model_args=()
+chat_args=()
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --model) model_args+=("$1" "$2"); shift 2 ;;
+    *)       chat_args+=("$1"); shift ;;
+  esac
+done
+
+exec python3 -c "import sys; sys.path.insert(0, '$here'); \
+from gregory.cli import main; raise SystemExit(main())" \
+  "${model_args[@]}" chat "${chat_args[@]}"

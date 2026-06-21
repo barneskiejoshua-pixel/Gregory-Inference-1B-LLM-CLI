@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Gregory CLI launcher. Runs the package CLI from the repo root.
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+exec python3 -c "import sys; sys.path.insert(0, '$here'); \
+from gregory.cli import main; raise SystemExit(main())" "$@"

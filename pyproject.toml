@@ -1,0 +1,39 @@
+# Gregory -- packaging + test/tooling config.
+#
+# CHARTER: the `gregory/` runtime is dep-light by design. numpy is the one
+# numeric primitive; `regex` is an OPTIONAL, fallback-guarded dep for the
+# LLaMA-3 pre-tokenizer (the tokenizer degrades to stdlib `re` without it).
+# Nothing else is imported at runtime. The NPARC checker (scripts/
+# nparc_compliance.py) enforces this: a new third-party import fails CI.
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gregory"
+version = "0.0.1"
+description = "Clean-room ternary-weight LLM inference engine (NumPy reference)"
+requires-python = ">=3.10"
+dependencies = ["numpy"]
+
+[project.optional-dependencies]
+tokenizer = ["regex"]   # proper \p{L}/\p{N} pre-tokenization (else stdlib re)
+dev = ["pytest>=8", "regex"]
+
+[project.scripts]
+gregory = "gregory.cli:main"
+
+[tool.setuptools]
+packages = ["gregory"]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "-q -ra"
+markers = [
+    "slow: needs the model or network; excluded from the default gate",
+    "model: requires the BitNet GGUF to be present",
+]
+python_files = ["test_*.py"]
+norecursedirs = [".git", ".venv", ".cache", "__pycache__"]
