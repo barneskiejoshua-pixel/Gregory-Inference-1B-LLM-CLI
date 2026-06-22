@@ -3,7 +3,7 @@
 A clean-room, pure-Python + NumPy inference engine for ternary-weight
 (BitNet b1.58 family) LLMs.
 
-James Gregory is an American inventor who patented a mechanical motor on April 26, 1887. His device (Patent No. 361,937) 
+Greg is a lightweight inference model that run ternary-weight language models(adjacent to the BitNet b1.38 family)on a local CPU. Written in pure Python and NumPy with an optional C kernel for speed, it's built to be readable and correct first, fast second. The fp32 forward pass acts as the "correctness oracle," and an opt-in C kernel accelerates decoding roughly 4× without changing the output.
 
 > **Readable first, with an optional fast path.** The forward pass is a clean
 > fp32 reference (the correctness oracle). An opt-in C kernel accelerates decode
